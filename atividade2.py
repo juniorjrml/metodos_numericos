@@ -1,15 +1,22 @@
 from metodos_numericos import bisseccao
 import math
 
+def p2(x):
+    return math.pow(x, 3)-87
 
 def p(x):
     return math.pow(x, 5) - math.pow(x, 3) + (3*x) - 5
 
-a = -4
+
+a = -8
 b = +4
 
-a = bisseccao(a, b, p)
-print(a)
-print("x | erro r | erro x")
-for i in a:
-    print(i)
+resultado = bisseccao(a, b, p)
+print(resultado)
+
+with open("resultado_atividade2.txt", "w") as f:
+    f.write("x | erro r | erro x \n")
+    for iteracao in resultado:
+        f.write(str(iteracao)+"\n")
+
+

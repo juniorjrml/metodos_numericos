@@ -64,13 +64,12 @@ def existe_zero(a, b, f):
         return False
 
 @tempo_decorrido
-def bisseccao(a, b, f, parada=100):
+def bisseccao(a, b, f, parada=1):
     valores_proximos = []
     erros_r = []
     erros_x = []
-    while parada != 0:
-        parada -= 1
 
+    while parada > 1e-20:
         x = ponto_medio(a, b)
         if f(x) != 0:
             valores_proximos.append(x)
@@ -89,10 +88,19 @@ def bisseccao(a, b, f, parada=100):
                 a = x
 
         else:
-            print(parada)
+            resultado = []
             valores_proximos.append(x)
             erros_x.append(0)
             erros_r.append(0)
+            for elemento in enumerate(valores_proximos):
+                resultado.append([
+                    elemento[1],
+                    erros_r[elemento[0]],
+                    erros_x[elemento[0]]
+                ])
+            resultado.append(len(valores_proximos))
+            return resultado
+        parada = erros_x[-1]  # Ultimo erro
 
-            return zip(valores_proximos, erros_r, erros_x)
     print("Erro ao encontrar")
+    return len(valores_proximos)
